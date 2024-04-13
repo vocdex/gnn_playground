@@ -1,6 +1,11 @@
 import numpy as np
 from scipy.sparse import coo_matrix
 from typing import List
+import pandas as pd
+import networkx as nx
+import os
+import matplotlib.pyplot as plt
+
 
 def edges_to_adjacency_mat(edges:List, num_nodes:int)->np.array:
     """Build adjacency matrix from edge lists"""
@@ -20,4 +25,26 @@ def adjacency_mat_to_edges(adj_mat:np.array)->List:
                 edges.append([i, j])
     return edges
 
+def load_cora(path:str):
+    """Load the Cora dataset"""
+    edgelist = pd.read_csv(os.path.join(path, 'cora.cites'), sep='\t', header=None, names=['target', 'source'])
+    edgelist["label"] = "cites"
+    features = pd.read_csv(os.path.join(path, 'cora.content'), sep='\t', header=None)
+    features = features.set_index(0)
+    labels = features[features.columns[-1]]
+    features = features.drop(features.columns[-1], axis=1)
+    features = features.values
+    labels = labels.values
+    breakpoint()
+    return edgelist, features, labels
 
+
+def visualize_cora(path:str):
+    """Visualize the Cora dataset"""
+    edgelist, features, labels = load_cora(path)
+    adj_mat = edges_to_adjacency_mat(edgelist[['source', 'target']].values, features.shape[0])
+    G = nx.from_numpy_matrix(adj_mat)
+    pos = nx.spring_layout(G)
+    plt.figure(figsize=(10, 10))
+    nx.draw(G, pos, node_size=50, node_color=labels, cmap=plt.cm.tab10)
+    plt.show()

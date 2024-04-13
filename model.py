@@ -19,6 +19,7 @@ class GCNLayer(nn.module):
         node_features = node_features / num_neighbours
         return node_features
     
+    
 class GCN(nn.Module):
     """GCN from Kipf et al. (2017)"""
     def __init__(self, in_features, hidden_features, out_features, bias=True):
@@ -34,3 +35,5 @@ class GCN(nn.Module):
         node_features = self.layer2(node_features, adj_matrix)
         return node_features
     
+
+
