@@ -1,5 +1,4 @@
-from utils import load_cora, visualize_cora
-
+from utils import visualize_cora
 
 cora_path = './cora'
 

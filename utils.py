@@ -7,34 +7,20 @@ import os
 import matplotlib.pyplot as plt
 
 
-def edges_to_adjacency_mat(edges:List, num_nodes:int)->np.array:
-    """Build adjacency matrix from edge lists"""
-    row = [edge[0] for edge in edges]
-    col = [edge[1] for edge in edges]
-    data = np.ones(len(edges))
+def edges_to_adjacency_mat(edges, num_nodes):
+    """Convert edge list to adjacency matrix"""
+    adj_mat = np.zeros((num_nodes, num_nodes))
+    for edge in edges:
+        adj_mat[edge[0]-1, edge[1]-1] = 1
+        adj_mat[edge[1]-1, edge[0]-1] = 1  # Assuming the graph is undirected
+    return adj_mat
 
-    adj_mat = coo_matrix((data, (row, col)), shape=(num_nodes, num_nodes))
-    return adj_mat.toarray()
-
-def adjacency_mat_to_edges(adj_mat:np.array)->List:
-    """Build edge lists from adjacency matrix"""
-    edges = []
-    for i in range(adj_mat.shape[0]):
-        for j in range(adj_mat.shape[1]):
-            if adj_mat[i, j] == 1:
-                edges.append([i, j])
-    return edges
 
 def load_cora(path:str):
     """Load the Cora dataset"""
     edgelist = pd.read_csv(os.path.join(path, 'cora.cites'), sep='\t', header=None, names=['target', 'source'])
-    edgelist["label"] = "cites"
     features = pd.read_csv(os.path.join(path, 'cora.content'), sep='\t', header=None)
-    features = features.set_index(0)
     labels = features[features.columns[-1]]
-    features = features.drop(features.columns[-1], axis=1)
-    features = features.values
-    labels = labels.values
     breakpoint()
     return edgelist, features, labels
 
