@@ -1,5 +1,12 @@
 # gnn_playground
 An ever-growing playground of scripts to showcase GNN's power and might
+## Karate Club Dataset
+It seems like the ReLU activation function is not optimal for GCNs as the model does learn proper embeddings. On the other hand, tahnh activation function seems to work well. The model is able to learn proper embeddings and the communities are clearly visible in the 2D plot.
+Here is the plot for the Karate Club dataset using the GCN model with tanh activation function:
+![Karate Club Dataset](/results/tanh/animation_tanh.gif)
+
+On the other hand, here is the plot for the Karate Club dataset using the GCN model with ReLU activation function:
+![Karate Club Dataset](/results/relu/animation_relu.gif)
 
 ## Goals
 - Implement a simple GCN, GAT models from scratch in PyTorch
