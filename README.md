@@ -8,7 +8,7 @@ pip install natsort
 ```
 
 ## Karate Club Dataset
-It seems like the ReLU activation function is not optimal for GCNs as the model does learn proper embeddings. On the other hand, tahnh activation function seems to work well. The model is able to learn proper embeddings and the communities are clearly visible in the 2D plot.
+It seems like the ReLU activation function is not optimal for GCNs as the model does not learn proper embeddings. On the other hand, tahnh activation function seems to work well. The model is able to learn proper embeddings and the communities are clearly visible in the 2D plot.
 To run the code, simply run the following command:
 ```bash
 python pyg_intor.py
