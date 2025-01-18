@@ -1,5 +1,6 @@
 # gnn_playground
-An ever-growing playground of scripts to showcase GNN's power and might
+An ever-growing playground of scripts to showcase GNN's power and might.
+
 To install the required packages, run the following command:
 ```bash
 pip install torch torchvision torch-geometric 
